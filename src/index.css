@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+html {
+  direction: rtl;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+section {
+  background: url(assets/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+section .container {
+  width: 100%;
+  max-width: 650px;
+  background: #332a224e;
+  padding: 30px 25px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 0 auto;
+}
+
+section .top_sec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+section .top_sec select {
+  width: 250px;
+  max-width: 250px;
+  border-radius: 5px;
+  outline: none;
+  background: #a54f3a;
+  padding: 8px 10px;
+  color: #fff;
+  font-size: 22px;
+  border: none;
+  cursor: pointer;
+}
+section .top_sec h3 {
+  color: #fff;
+  font-size: 28px;
+  padding: 10px;
+}
+
+section .top_sec .date {
+  width: 100%;
+  max-width: 250px;
+}
+
+section .top_sec .date h4 {
+  font-size: 26px;
+  color: #fff;
+}
+
+section .prayer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: #c0583e75;
+  margin-bottom: 25px;
+  color: #c0bbbb;
+  font-size: 24px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  section {
+    padding: 15px;
+  }
+
+  section .container {
+    padding: 25px 20px;
+  }
+
+  section .top_sec {
+    flex-direction: column;
+    align-items: stretch;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+  }
+
+  section .top_sec h3 {
+    font-size: 24px;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  section .top_sec select {
+    max-width: 100%;
+    font-size: 20px;
+  }
+
+  section .top_sec .date {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  section .top_sec .date h4 {
+    font-size: 22px;
+  }
+
+  section .prayer {
+    font-size: 20px;
+    padding: 12px 20px;
+  }
+}
+
+/* Mobile devices (480px and below) */
+@media (max-width: 480px) {
+  section {
+    padding: 10px;
+  }
+
+  section .container {
+    padding: 20px 15px;
+  }
+
+  section .top_sec h3 {
+    font-size: 20px;
+  }
+
+  section .top_sec select {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+
+  section .top_sec .date h4 {
+    font-size: 18px;
+  }
+
+  section .prayer {
+    font-size: 18px;
+    padding: 10px 15px;
+    gap: 15px;
+  }
+}
+
+/* Very small devices (360px and below) */
+@media (max-width: 360px) {
+  section {
+    padding: 8px;
+  }
+
+  section .container {
+    padding: 15px 10px;
+  }
+
+  section .top_sec h3 {
+    font-size: 18px;
+  }
+
+  section .top_sec select {
+    font-size: 16px;
+  }
+
+  section .top_sec .date h4 {
+    font-size: 16px;
+  }
+
+  section .prayer {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+}
