@@ -49,11 +49,11 @@ function App() {
         if (data_Prayer.code === 200) {
           setPrayerTimes(data_Prayer.data.timings);
           setDateTime(data_Prayer.data.date.gregorian.date);
-          console.log("التاريخ:", data_Prayer.data.date.gregorian.date);
-          console.log("المواقيت:", data_Prayer.data.timings);
+          console.log(data_Prayer.data.date.gregorian.date);
+          console.log(data_Prayer.data.timings);
         }
       } catch (error) {
-        console.error("خطأ في جلب البيانات:", error);
+        console.error(error);
       }
     };
 
