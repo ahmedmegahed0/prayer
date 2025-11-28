@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import Prayer from "./component/Prayer"
 
-
 function App() {
 
   const [prayerTimes, setPrayerTimes] = useState({});
-  const [datetime , setDateTime] = useState("");
+  const [datetime, setDateTime] = useState("");
   const [city, setCity] = useState("Cairo");
 
   const cities = [
-    { name: "القاهره", value: "Cairo"},
+    { name: "القاهره", value: "Cairo" },
     { name: "الاسكندريه", value: "Alexandria" },
     { name: "الجيزه", value: "Giza" },
     { name: "المنصوره", value: "Mansoura" },
@@ -22,77 +21,78 @@ function App() {
     { name: "الشرقية", value: "Sharqia" },
     { name: "دمياط", value: "Damietta" },
     { name: "بورسعيد", value: "Port Said" },
-    { name: "الإسماعيلية", value: "Dakahlia" },
+    { name: "الإسماعيلية", value: "Ismailia" },
     { name: "السويس", value: "Suez" },
-    { name: "جنوب سيناء", value: "North Sinai" },
+    { name: "شمال سيناء", value: "North Sinai" },
+    { name: "جنوب سيناء", value: "South Sinai" },
     { name: "البحر الأحمر", value: "Red Sea" },
     { name: "الفيوم", value: "Fayoum" },
     { name: "المنيا", value: "Minya" },
     { name: "بني سويف", value: "Beni Suef" },
     { name: "أسيوط", value: "Assiut" },
-    { name: " سوهاج", value: "Beni Suef" },
-    { name: "بني سويف", value: "Sohag" },
+    { name: "سوهاج", value: "Sohag" },
     { name: "قنا", value: "Qena" },
-    { name: "أسوان", value: "Aswan" },
     { name: "مطروح", value: "Matrouh" },
-    { name: "الاقصر", value: "Luxor" }
+    { name: "الاقصر", value: "Luxor" },
+    { name: "العريش", value: "El arish" }
   ];
 
-
   useEffect(() => {
-    const fetchPrayerTimes = async () => {  
+    const fetchPrayerTimes = async () => {
       try {
-        const response = await fetch(`https://api.aladhan.com/v1/timingsByCity/03-09-2024?city=Eg&country=${city}`);
-        const data_Prayar = await response.json();
+        const response = await fetch(
+          `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Egypt`
+        );
 
-        setPrayerTimes(data_Prayar.data.timings);
-        setDateTime(data_Prayar.data.date.gregorian.date);
-        console.log(data_Prayar.data.date.gregorian.date);
-    } catch(error) {
-      console.error(error);
-    }
-  }
+        const data_Prayer = await response.json();
+
+        if (data_Prayer.code === 200) {
+          setPrayerTimes(data_Prayer.data.timings);
+          setDateTime(data_Prayer.data.date.gregorian.date);
+          console.log("التاريخ:", data_Prayer.data.date.gregorian.date);
+          console.log("المواقيت:", data_Prayer.data.timings);
+        }
+      } catch (error) {
+        console.error("خطأ في جلب البيانات:", error);
+      }
+    };
+
     fetchPrayerTimes();
-  }, [city]  )
-
+  }, [city]);
 
   const formatTime = (time) => {
-  
-    if (!time) { 
-      return "00:00" 
-    } 
+    if (!time) {
+      return "00:00";
+    }
     let [hours, minutes] = time.split(':').map(Number);
-    const pred = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12; 
-    return `${hours}:${minutes < 10 ? "0" + minutes : minutes} ${pred}`;
+    const period = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}`;
   }
 
   return (
     <>
       <section>
-    
         <div className="container">
           <div className="top_sec">
             <div className="city">
-
               <h3>المدينه</h3>
-
-              <select name="" id="" onChange={(e) => setCity(e.target.value)}> 
+              <select onChange={(e) => setCity(e.target.value)} value={city}>
                 {cities.map((city_Obj) => (
-                  <option key={city_Obj.value} value={city_Obj.value}>{city_Obj.name}</option>
+                  <option key={city_Obj.value} value={city_Obj.value}>
+                    {city_Obj.name}
+                  </option>
                 ))}
               </select>
-
             </div>
             <div className="date">
-
               <h3>التاريخ</h3>
-              <h4> {datetime} </h4>
+              <h4>{datetime}</h4>
             </div>
           </div>
           <Prayer name="الفجر" time={formatTime(prayerTimes.Fajr)} />
           <Prayer name="الظهر" time={formatTime(prayerTimes.Dhuhr)} />
-          <Prayer name="العصر" time={formatTime(prayerTimes.Asr)}/>
+          <Prayer name="العصر" time={formatTime(prayerTimes.Asr)} />
           <Prayer name="المغرب" time={formatTime(prayerTimes.Maghrib)} />
           <Prayer name="العشاء" time={formatTime(prayerTimes.Isha)} />
         </div>
